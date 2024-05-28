@@ -37,7 +37,7 @@ function App() {
           element: <Register />
         },
         {
-          path: "/single",
+          path: "/post/:id",
           element: <Single />
         },
         {

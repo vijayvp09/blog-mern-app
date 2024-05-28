@@ -1,4 +1,6 @@
-import {Link} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
+
+
   const posts = [
     {
       id: 1,
@@ -27,6 +29,11 @@ import {Link} from "react-router-dom"
   ];
 
 export default function Home() {
+    const navigate = useNavigate()
+
+    function handleClick(id) {
+        navigate(`/post/${id}`)
+    }
     return(
         <div className="home">
             <div className="posts">
@@ -37,11 +44,11 @@ export default function Home() {
                             <img src={post.img} alt="" />
                         </div>
                         <div className="content">
-                            <Link className="link">
-                            <h1 className="title" to={`/post/${post.id}`}>{post.title}</h1>
+                            <Link className="link" to={`/post/${post.id}`}>
+                            <h1 className="title" >{post.title}</h1>
                             </Link>
                             <p className="desc">{post.desc}</p>
-                            <button>Read more</button>
+                            <button onClick={()=>handleClick(post.id)}>Read more</button>
                         </div>
                     </div>
                 )})}
