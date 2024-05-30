@@ -7,7 +7,7 @@ export default function Write() {
     return(
         <div className="add">
             <div className="content">
-                <input type="text" placeholder="title" />
+                <input type="text" placeholder="Title" />
                 <div className="editorContainer">
                 <ReactQuill className="editor" theme="snow" value={value} onChange={setValue} />
                 </div>
@@ -22,35 +22,35 @@ export default function Write() {
                         <b>Visibility:</b> Public
                     </span>
                     <input style={{display: "none"}}type="file" id="file"  />
-                    <label htmlFor="file">Upload Image</label>
+                    <label className="file" htmlFor="file">Upload Image</label>
                     <div className="buttons">
                         <button>Save as draft</button>
                         <button>Update</button>
                     </div>
                 </div>
-                <div className="item2">
+                <div className="item">
                     <h1>Category</h1>
-                    <div>
+                    <div className="cat">
                     <input type="radio" id="art" value="art" name="cat" />
                     <label htmlFor="art">Art</label>
                     </div>
-                    <div>
+                    <div className="cat">
                     <input type="radio" id="cinema" value="cinema" name="cat" />
                     <label htmlFor="cinema">Cinema</label>
                     </div>
-                    <div>
+                    <div className="cat">
                     <input type="radio" id="science" value="science" name="cat" />
                     <label htmlFor="science">Science</label>
                     </div>
-                    <div>
+                    <div className="cat">
                     <input type="radio" id="technology" value="technology" name="cat" />
                     <label htmlFor="technology">Technology</label>
                     </div>
-                    <div>
+                    <div className="cat">
                     <input type="radio" id="food" value="food" name="cat" />
                     <label htmlFor="food">Food</label>
                     </div>
-                    <div>
+                    <div className="cat">
                     <input type="radio" id="design" value="design" name="cat" />
                     <label htmlFor="design">Design</label>               
                     </div>
