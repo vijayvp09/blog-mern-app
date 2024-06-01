@@ -29,14 +29,6 @@ function App() {
           element: <Home />
         },
         {
-          path: "/login",
-          element: <Login />
-        },
-        {
-          path: "/register",
-          element: <Register />
-        },
-        {
           path: "/post/:id",
           element: <Single />
         },
@@ -45,7 +37,15 @@ function App() {
           element: <Write />
         }
       ]
-    }
+    },
+    {
+      path: "/login",
+      element: <Login />
+    },
+    {
+      path: "/register",
+      element: <Register />
+    },
    ]); 
   
 
