@@ -2,7 +2,7 @@ import {Link, useNavigate} from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import {useContext} from "react"
-import { AuthContext } from "../context/AuthContext.jsx"
+import { AuthContext } from "../context/authContext.jsx"
 
 export default function Login() {
     const [inputs, setInputs] = useState({
@@ -21,7 +21,7 @@ export default function Login() {
         e.preventDefault();
         
         try{
-            await login(inputs)
+            await login(inputs);
             navigate("/")
         }
         catch(err){

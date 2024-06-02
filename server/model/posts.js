@@ -6,6 +6,7 @@ const postSchema = new Schema({
     desc: {type: String, required: true},
     img: {type: String, required: true},
     createdAt: {type: Date, default: Date.now()},
+    cat: {type: String},
     uid: {type: mongoose.Schema.Types.ObjectId, ref: User}
 });
 

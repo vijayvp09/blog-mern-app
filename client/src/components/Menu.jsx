@@ -34,7 +34,7 @@ export default function Menu() {
                 {
                     posts.map(post=> {
                         return(
-                            <div className="post">
+                            <div className="post" key={post.id} >
                                 <img src={post.img} alt="" />
                                 <h2>{post.title}</h2>
                                 <button>Read more</button>
