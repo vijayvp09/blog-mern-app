@@ -20,7 +20,7 @@ export const getPosts = async (req, res) => {
 
 export const getPost = async (req, res) => {
     try{
-        const postId = req.params;
+        const postId = req.params.id;
         console.log(postId)
         const data = await Posts.findOne({_id: postId}).populate('uid').exec();
         return res.status(200).json(data)
