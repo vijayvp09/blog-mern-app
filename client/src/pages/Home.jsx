@@ -32,39 +32,14 @@ import axios from "axios"
 
 export default function Home() {
     const navigate = useNavigate()
-    const [posts, setPosts] = useState([
-      {
-            id: 1,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          },
-          {
-            id: 2,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/6489663/pexels-photo-6489663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          },
-          {
-            id: 3,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/4230630/pexels-photo-4230630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          },
-          {
-            id: 4,
-            title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-            desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-            img: "https://images.pexels.com/photos/6157049/pexels-photo-6157049.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-          },
-    ]);
+    const [posts, setPosts] = useState([]);
     const cat = useLocation().search;
  
     useEffect(() => {
       async function fetchAllPosts () {
         try{
-
-          const res = await axios.get(`/posts${cat}`);
+          console.log("a")
+          const res = await axios.get(`http://localhost:8000/api/posts${cat}`);
           console.log(res)
           setPosts(res.data);
           console.log(res.data)
@@ -87,7 +62,7 @@ export default function Home() {
                     return(
                     <div className="post" key={post.id}>
                         <div className="img">
-                            <img src={post.img} alt="" />
+                            <img src={`../upload/${post.img}`} alt="" />
                         </div>
                         <div className="content">
                             <Link className="link" to={`/post/${post.id}`}>

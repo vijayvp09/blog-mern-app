@@ -1,5 +1,8 @@
 import User from "../model/user.js"
 import Posts from "../model/posts.js"
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
+dotenv.config(); 
 
 export const getPosts = async (req, res) => {
     try{
@@ -30,16 +33,73 @@ export const getPost = async (req, res) => {
     }
 }
 
-export const addPost = (req, res) => {
-    res.json()
+export const addPost = async (req, res) => {
+    try{
+        const token = req.cookie.access_token;
+        if(!token) return res.status(401).json({message: "Not authenticated"});
+
+        jwt.verify(token, process.env.SECRET_KEY, async (err, userInfo) => {
+            if(err) return res.status(403).json({message: "Token is invalid"});
+            const data = await Posts.create({
+                title: req.body.title, 
+                desc: req.body.desc, 
+                img: req.body.img, 
+                cat: req.body.cat,
+                uid: userInfo._id
+            });
+            res.status(200).json({message: "Post has been created."});
+        });
+        
+    }catch(err) {
+        res.json(err);
+    }
 }
 
-export const updatePost = (req, res) => {
-    res.json()
+export const updatePost = async (req, res) => {
+    try{
+        const token = req.cookie.access_token;
+        if(!token) return res.status(401).json({message: "Not authenticated"});
+
+        jwt.verify(token, process.env.SECRET_KEY, async (err, userInfo) => {
+            if(err) return res.status(403).json({message: "Token is invalid"});
+
+            const data = await Posts.findOneAndUpdate({
+                _id: req.params.id,
+                uid: userInfo._id,
+            },{$set:{
+                title: req.body.title, 
+                desc: req.body.desc, 
+                img: req.body.img, 
+                cat: req.body.cat,
+            }},
+            {new: true, runValidators: true});
+
+            res.status(200).json({message: "Post has been updated."});
+        });
+        
+    }catch(err) {
+        res.json(err);
+    }
 }
 
-export const deletePost = (req, res) => {
-    res.json()
+export const deletePost = async (req, res) => {
+    try{
+        const token = req.cookie.access_token;
+        if(!token) return res.status(401).json({message: "Not authenticated"});
+
+        jwt.verify(token, process.env.SECRET_KEY, async (err, userInfo) => {
+            if(err) return res.status(403).json({message: "Token is invalid"});
+            try{
+                const data = await Posts.deleteOne({_id: req.params.id, uid: userInfo._id})
+                res.status(200).json({message: "succesfully deleted"});
+            }catch(err){
+                res.status(403).json({message: "you can delete only your post!"})
+            }
+            
+        } )
+    }catch(err) {
+        res.json(err)
+    }
 }
 
 

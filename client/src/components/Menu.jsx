@@ -30,11 +30,11 @@ import axios from "axios"
 //   ];
 
 export default function Menu({cat}) {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     async function fetchAllPosts () {
       try{
-        const res = await axios.get(`/posts/?cat=${cat}`);
+        const res = await axios.get(`http://localhost:8000/api/posts/?cat=${cat}`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -50,7 +50,7 @@ export default function Menu({cat}) {
             posts.map(post=> {
               return(
                 <div className="post" key={post.id} >
-                    <img src={post.img} alt="" />
+                    <img src={`../upload/${post?.img}`} alt="" />
                     <h2>{post.title}</h2>
                     <button>Read more</button>
                 </div>
